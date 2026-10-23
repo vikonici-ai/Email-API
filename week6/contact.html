@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@5/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "Pj0tgDjXG-IbEIvtr",
+      });
+   })();
+</script>
+    <style>
+        :root {
+            --yellow: #facc15;
+            --yellow-soft: #fff7c2;
+            --blue: #2563eb;
+            --blue-dark: #1d4ed8;
+            --pink: #f472b6;
+            --pink-soft: #fdf2f8;
+            --text: #1f2937;
+            --muted: #475569;
+            --white: #ffffff;
+            --shadow: rgba(37, 99, 235, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 680px;
+            margin: 60px auto;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--yellow-soft) 0%, #dbeafe 48%, var(--pink-soft) 100%);
+            color: var(--text);
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--blue-dark);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 28px 24px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            border-radius: 18px;
+            box-shadow: 0 18px 45px var(--shadow);
+            backdrop-filter: blur(8px);
+        }
+
+        input, textarea, button {
+            font: inherit;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 16px;
+            color: var(--text);
+            background: #fff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--muted);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--pink);
+            box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.14);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 14px 18px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--pink) 100%);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 24px rgba(244, 114, 182, 0.2);
+            filter: brightness(1.03);
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Contact Form</h1>
+
+<form id="contact">
+
+    <input type="hidden" name="subject" value="Contact Form Submission">
+
+    Name:
+    <input type="text" name="name">
+
+    <br>
+    Email:
+    <input type="email" name="email">
+
+    Message:
+    <textarea name="message" id="message"></textarea>
+
+    <br>
+
+    <button type="submit">Send Message</button>
+
+</form>
+
+<script>
+
+// send email using EmailJS
+document.getElementById('contact').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm('service_gisdh6h', 'template_68twlci', this)
+        .then(function() {
+            alert('Email sent successfully!');
+        }, function(error) {
+            console.error(error);
+            alert('Failed to send email: ' + JSON.stringify(error));
+        });
+});
+
+</script>
+
+</body>
+</html>
